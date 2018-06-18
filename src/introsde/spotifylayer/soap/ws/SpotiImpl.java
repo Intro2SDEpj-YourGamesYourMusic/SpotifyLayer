@@ -33,7 +33,7 @@ public class SpotiImpl implements Spoti {
 
 	//authenticator method
 	public static void authenticator() {
-		byte[] encodedBytes = Base64.getEncoder().encode("f75f57d0d31d4786b97ed810e847010e:e3e596a3621348d8a564ba43fa2e3a46".getBytes());
+		byte[] encodedBytes = Base64.getEncoder().encode("*CENSURED*".getBytes());
 		//System.out.println("encodedBytes " + new String(encodedBytes));
 		WebTarget athservice=client.target("https://accounts.spotify.com");
 		MultivaluedMap<String, String> formData = new MultivaluedHashMap<String, String>();
