@@ -23,17 +23,18 @@ The ws package is the main part of this service. **Spoti.java** is the interface
 -getRecommendation: returns 5 songs given up to 5 seeds of artists or songs (can be combined, like 2 artists and 3 songs or 1 artist and 4 songs). Seeds are basically IDs.  
 The implementation of these methods (contained in **SpotiImpl.java**) are explained in the following chapter.  
 **build.xml** and **ivy.xml** are almost the same used during the soap classes.  
-In WebContent/WEB-INF/ there are two xml files **web.xml** and **sun-jaxws.xml** used to describe where the web services would be placed on heroku (/spoti). This technique was already used for the assignment3 to solve some weird errors which made disappear the web service on heroku. Credits to: https://www.mkyong.com/webservices/jax-ws/deploy-jax-ws-web-services-on-tomcat/  
+In WebContent/WEB-INF/ there are two xml files **web.xml** and **sun-jaxws.xml** used to describe where the web services would be placed on heroku (/spoti). This technique was already used for the assignment3 to solve some weird errors which made disappear the web service on heroku.  
+Credits to: https://www.mkyong.com/webservices/jax-ws/deploy-jax-ws-web-services-on-tomcat/  
 
 
 ### Description of the code
 
 The following description is only about the **SpotiImpl.java** class since the previously mentioned classes do not require further explanations. The authenticator method is required to access to the spotify api, it is basically a unique identifier to allow spotify to monitor which "app" or "company" is accessing them data. This method is just a copy-paste from the Spotify API guide in order to get the authentication which is stored globally in access_token.  
 From now on every request is made to api.spotify.com with a REST request on a specific path and with additional query parameters (checkable on their api documentation).  
-searchArtist is a GET on /v1/search?type=artist&limit=1 sending in the body the access_token obtained above. It is limited to one since it returns a list of artists based on the search but it is assumed that the first one is correct (for simplicity).  
-searchSong does the same with type=track  
-getTopTrackByArtist is a GET on /v1/artists/artistID/top-tracks where artistID is received as input on the method (it therefore requires that other services searched first for an artist in order to get its ID). A query parameter (?country=IT) is also required in order to get the most popular songs in a certain region. As always the access_token is delivered in the body of the request.  
-getRecommendation is a GET request on /v1/recommendations with query parameters that can be "seed_artists" and "seed_tracks". A maximum of 5 seeds can be delivered to the Spotify API independently of the type of the seed (e.g. 2 artists, 3 songs or 1 artist, 4 songs). artistSeeds and songSeeds are strings of IDs separated by commas.  
+**searchArtist** is a GET on /v1/search?type=artist&limit=1 sending in the body the access_token obtained above. It is limited to one since it returns a list of artists based on the search but it is assumed that the first one is correct (for simplicity).  
+**searchSong** does the same with type=track.  
+**getTopTrackByArtist** is a GET on /v1/artists/artistID/top-tracks where artistID is received as input on the method (it therefore requires that other services searched first for an artist in order to get its ID). A query parameter (?country=IT) is also required in order to get the most popular songs in a certain region. As always the access_token is delivered in the body of the request.  
+**getRecommendation** is a GET request on /v1/recommendations with query parameters that can be "seed_artists" and "seed_tracks". A maximum of 5 seeds can be delivered to the Spotify API independently of the type of the seed (e.g. 2 artists, 3 songs or 1 artist, 4 songs). artistSeeds and songSeeds are strings of IDs separated by commas.  
 For every request a JSON is returned, containing the expected information. The JSONObject class parses the Response and with some iteration on the JSON document, the important information are stored and returned (spotify returns A LOT of information about artists and songs that are not needed in this project).  
 
 
