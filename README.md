@@ -2,7 +2,7 @@
 **Heroku Host URL:** https://sdeproject-spotilayer.herokuapp.com/  
 **Heroku WSDL URL:** https://sdeproject-spotilayer.herokuapp.com/spoti?wsdl  
 **Github repositories of the project:**  
-https://github.com/Intro2SDEpj-YourGamesYourMusic 
+https://github.com/Intro2SDEpj-YourGamesYourMusic  
 I worked with Mattia Buffa.  
 
 ## SpotifyLayer
